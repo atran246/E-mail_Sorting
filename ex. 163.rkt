@@ -9,6 +9,11 @@
 ; interp. (make-mail f d m) represents text m sent by
 ; f, d seconds after the beginning of time 
 
+(define mail1 (make-mail ("andrew" 12 "hi")))
+(define mail2 (make-mail ("pearce" 834 "whats up")))
+(define mail3 (make-mail ("joseph" 100034 "not much")))
+
+
 ; A List-of-mail is one of:
 ; empty
 ; (cons Mail List-of-mail)
@@ -16,16 +21,28 @@
 
 ; List-of-mail -> List-of-mail
 ; to take a list-of-mail and sort the mail by date.
-(define (sort-date lom) empty)
+(define (sort-date lom) 
+  (cond
+    [(empty? lom) ...]
+    [(cons? lom) ... (first lom) (rest lom)]))
 
 ; Mail List-of-mail -> List-of-mail
 ; insert the mail into the sorted list of mail,lom, by date
-(define (insert-by-date m lom) empty) 
+(define (insert-by-date m lom) 
+  (cond
+    [(empty? lom) ...]
+    [else ... (first lom) ... (rest lom)...])) 
 
 ; List-of-mail -> List-of-mail
 ; to take a list-of-mail and sort the mail by name.
-(define (sort-name lom) empty)
+(define (sort-name lom) 
+    (cond
+    [(empty? lom) ...]
+    [(cons? lom) ... (first lom) (rest lom)]))
 
 ; Mail List-of-mail -> List-of-mail
 ; insert the mail into the sorted list of mail,lom, by name
-(define (inser-name m lom) empty)
+(define (inser-name m lom) 
+  (cond
+    [(empty? lom) ...]
+    [else ... (first lom) ... (rest lom)...]))
