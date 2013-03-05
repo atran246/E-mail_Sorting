@@ -14,4 +14,18 @@
 ; (cons Mail List-of-mail)
 ; interp. a List-of-mail as a list of email messages 
 
+; List-of-mail -> List-of-mail
+; to take a list-of-mail and sort the mail by date.
+(define (sort-date lom) empty)
 
+; Mail List-of-mail -> List-of-mail
+; insert the mail into the sorted list of mail,lom, by date
+(define (insert-by-date m lom) empty) 
+
+; List-of-mail -> List-of-mail
+; to take a list-of-mail and sort the mail by name.
+(define (sort-name lom) empty)
+
+; Mail List-of-mail -> List-of-mail
+; insert the mail into the sorted list of mail,lom, by name
+(define (inser-name m lom) empty)
