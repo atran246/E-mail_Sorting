@@ -9,9 +9,9 @@
 ; interp. (make-mail f d m) represents text m sent by
 ; f, d seconds after the beginning of time 
 
-(define mail1 (make-mail ("andrew" 12 "hi")))
-(define mail2 (make-mail ("pearce" 834 "whats up")))
-(define mail3 (make-mail ("joseph" 100034 "not much")))
+(define mail1 (make-mail "andrew" 12 "hi"))
+(define mail2 (make-mail "pearce" 834 "whats up"))
+(define mail3 (make-mail "joseph" 100034 "not much"))
 
 
 ; A List-of-mail is one of:
@@ -21,6 +21,8 @@
 
 ; List-of-mail -> List-of-mail
 ; to take a list-of-mail and sort the mail by date.
+(check-expect (sort-date (list mail1 mail3 mail2)) 
+              (list mail1 mail2 mail3))
 (define (sort-date lom) 
   (cond
     [(empty? lom) ...]
@@ -28,13 +30,16 @@
 
 ; Mail List-of-mail -> List-of-mail
 ; insert the mail into the sorted list of mail,lom, by date
-(define (insert-by-date m lom) 
+(check-expect (insert-date mail2 (list mail1 mail3)) 
+              (list mail1 mail2 mail3))
+(define (insert-date m lom) 
   (cond
     [(empty? lom) ...]
     [else ... (first lom) ... (rest lom)...])) 
 
 ; List-of-mail -> List-of-mail
 ; to take a list-of-mail and sort the mail by name.
+(check-expect (sort-name (list mail1 mail3 mail2)) (list mail1 mail3 mail2))
 (define (sort-name lom) 
     (cond
     [(empty? lom) ...]
@@ -42,6 +47,8 @@
 
 ; Mail List-of-mail -> List-of-mail
 ; insert the mail into the sorted list of mail,lom, by name
+(check-expect (insert-name mail2 (list mail1 mail3)) 
+              (list mail1 mail3 mail2))
 (define (inser-name m lom) 
   (cond
     [(empty? lom) ...]
