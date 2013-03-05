@@ -25,31 +25,46 @@
               (list mail1 mail2 mail3))
 (define (sort-date lom) 
   (cond
-    [(empty? lom) ...]
-    [(cons? lom) ... (first lom) (rest lom)]))
+    [(empty? lom) empty]
+    [(cons? lom) (insert-date (first lom) (sort-date (rest lom)))]))
 
 ; Mail List-of-mail -> List-of-mail
-; insert the mail into the sorted list of mail,lom, by date
+; insert the mail into the sorted list of mail,lom, by date, newest to oldest
 (check-expect (insert-date mail2 (list mail1 mail3)) 
               (list mail1 mail2 mail3))
 (define (insert-date m lom) 
   (cond
-    [(empty? lom) ...]
-    [else ... (first lom) ... (rest lom)...])) 
+    [(empty? lom) (cons m empty)]
+    [else (if (<= (date m) (date (first lom)))
+              (cons m lom)
+              (cons (first lom) (insert-date m (rest lom))))])) 
+
+; mail -> number
+; take the date out of a mail structure
+(check-expect (date mail1) 12)
+(define (date m) (mail-date m))
 
 ; List-of-mail -> List-of-mail
 ; to take a list-of-mail and sort the mail by name.
 (check-expect (sort-name (list mail1 mail3 mail2)) (list mail1 mail3 mail2))
 (define (sort-name lom) 
     (cond
-    [(empty? lom) ...]
-    [(cons? lom) ... (first lom) (rest lom)]))
+    [(empty? lom) empty]
+    [(cons? lom) (insert-name (first lom) (sort-name (rest lom)))]))
 
 ; Mail List-of-mail -> List-of-mail
 ; insert the mail into the sorted list of mail,lom, by name
 (check-expect (insert-name mail2 (list mail1 mail3)) 
               (list mail1 mail3 mail2))
-(define (inser-name m lom) 
+(define (insert-name m lom) 
   (cond
-    [(empty? lom) ...]
-    [else ... (first lom) ... (rest lom)...]))
+    [(empty? lom) (cons m empty)]
+    [else (if (string<? (name m) (name (first lom)))
+              (cons m lom)
+              (cons (first lom) (insert-name m (rest lom))))]))
+
+; mail -> string
+; take the name out of a mail structure
+(check-expect (name mail1) "andrew")
+(define (name m) (mail-from m))
+
